@@ -45,7 +45,7 @@ int Field::getPoint(int row, int col) const
 
 void Field::down()
 {
-	// Ø‡Æ¢•‡®‚Ï ¢Æß¨Æ¶≠Æ·‚Ï Ø•‡•¨•·‚®‚Ï ‰®£„‡„ ≠®¶•
+	// –ø—Ä–æ–≤–µ—Ä–∏—Ç—å –≤–æ–∑–º–æ–∂–Ω–æ—Å—Ç—å –ø–µ—Ä–µ–º–µ—Å—Ç–∏—Ç—å —Ñ–∏–≥—É—Ä—É –Ω–∏–∂–µ
 	if (isDownAvailable())
 	{
 		draw(m_shape, 0);
