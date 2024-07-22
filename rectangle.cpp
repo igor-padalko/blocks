@@ -91,15 +91,41 @@ void Rectangle::setPoint(int x, int y, int value)
 
 Rectangle Rectangle::copyPart(int x, int y, int w, int h) const
 {
-
+	Rectangle result(w, h);
+	for (int xx = 0; xx < w; ++xx)
+	{
+		for (int yy = 0; yy < h; ++yy)
+		{
+			result.setPoint(xx, yy, point(x + xx, y + yy));
+		}
+	}
+	return result;
 }
 
 bool Rectangle::comparePart(int x, int y, const Rectangle& other) const
 {
-
+	for (int xx = 0; xx < other.w(); ++xx)
+	{
+		for (int yy = 0; yy < other.h(); ++yy)
+		{
+			int p1 = point(x + xx, y + yy);
+			int p2 = other.point(xx, yy);
+			if (p1 != p2)
+			{
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 void Rectangle::paste(int x, int y, const Rectangle& other)
 {
-
+	for (int xx = 0; xx < other.w(); ++xx)
+	{
+		for (int yy = 0; yy < other.h(); ++yy)
+		{
+			setPoint(x + xx, y + yy, other.point(xx, yy));
+		}
+	}
 }
