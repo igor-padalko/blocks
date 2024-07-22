@@ -129,3 +129,16 @@ void Rectangle::paste(int x, int y, const Rectangle& other)
 		}
 	}
 }
+
+std::ostream& operator<<(std::ostream& os, const Rectangle& r)
+{
+	for (int yy = r.h(); --yy >= 0;)
+	{
+		for (int xx = 0; xx < r.w(); ++xx)
+		{
+			os << r.point(xx, yy);
+		}
+		os << std::endl;
+	}
+	return os;
+}

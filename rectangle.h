@@ -1,6 +1,7 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
+#include <iostream>
 #include <vector>
 
 class Rectangle
@@ -29,7 +30,6 @@ public:
 	bool comparePart(int x, int y, const Rectangle& other) const;
 	void paste(int x, int y, const Rectangle& other);
 
-
 private:
 	int m_x;
 	int m_y;
@@ -37,5 +37,7 @@ private:
 	int m_h;
 	std::vector<int> m_data;
 };
+
+std::ostream& operator<<(std::ostream& os, const Rectangle& m);
 
 #endif // RECTANGLE_H
