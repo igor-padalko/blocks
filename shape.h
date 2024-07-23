@@ -1,9 +1,9 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#include <vector>
+#include "rectangle.h"
 
-class Shape
+class Shape : public Rectangle
 {
 public:
 	enum ShapeType
@@ -16,20 +16,10 @@ public:
 		SLeft,
 		SRight,
 	};
+
 	Shape();
+	Shape(const Rectangle& other);
 	Shape(ShapeType shapeType);
-
-	void rotateRight();
-	void rotateLeft();
-	void show();
-
-	char rows() const;
-	char columns() const;
-	char value(char row, char column) const;
-private:
-	char m_columns;
-	char m_rows;
-	std::vector<char> m_data;
 };
 
 #endif // SHAPE_H

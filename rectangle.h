@@ -6,6 +6,8 @@
 
 class Rectangle
 {
+protected:
+	Rectangle(int w, int h, const std::vector<int> data);
 public:
 	Rectangle();
 	Rectangle(int w, int h);
@@ -32,6 +34,9 @@ public:
 
 	Rectangle rotateLeft() const;
 	Rectangle rotateRight() const;
+
+protected:
+	void setData(const std::vector<int> data);
 
 private:
 	int m_x;

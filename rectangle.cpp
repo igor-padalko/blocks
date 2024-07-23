@@ -1,12 +1,20 @@
 #include "rectangle.h"
 
+Rectangle::Rectangle(int w, int h, const std::vector<int> data)
+	: m_x(0)
+	, m_y(0)
+	, m_w(w)
+	, m_h(h)
+	, m_data(data)
+{
+}
+
 Rectangle::Rectangle()
 	: m_x(0)
 	, m_y(0)
 	, m_w(0)
 	, m_h(0)
 {
-
 }
 
 Rectangle::Rectangle(int w, int h)
@@ -154,6 +162,11 @@ Rectangle Rectangle::rotateRight() const
 		}
 	}
 	return result;
+}
+
+void Rectangle::setData(const std::vector<int> data)
+{
+	m_data = data;
 }
 
 std::ostream& operator<<(std::ostream& os, const Rectangle& r)
