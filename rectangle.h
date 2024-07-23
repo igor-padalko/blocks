@@ -30,6 +30,9 @@ public:
 	bool comparePart(int x, int y, const Rectangle& other) const;
 	void paste(int x, int y, const Rectangle& other);
 
+	Rectangle rotateLeft() const;
+	Rectangle rotateRight() const;
+
 private:
 	int m_x;
 	int m_y;

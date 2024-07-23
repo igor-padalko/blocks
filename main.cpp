@@ -9,17 +9,22 @@ int main()
 	Rectangle r(10,15);
 	r.setPoint(2, 2);
 	std::cout << r;
-	Rectangle c = r.copyPart(2, 2, 5, 5);
+	Rectangle c = r.copyPart(2, 2, 5, 6);
 	std::cout << std::endl;
 	std::cout << "comapre: " << r.comparePart(2, 2, c) << std::endl;
 	c.setPoint(4, 4);
 	std::cout << c;
 	std::cout << "comapre: " << r.comparePart(2, 2, c) << std::endl;
 	std::cout << std::endl;
-
 	r.paste(5, 5, c);
-	std::cout << r;
+	std::cout << r << std::endl;
+	c.setPoint(0, 4);
+	std::cout << c << std::endl;
+	Rectangle rotatedLeft = c.rotateLeft();
+	std::cout << rotatedLeft << std::endl;
 
+	Rectangle rotatedRight = c.rotateRight().rotateRight();
+	std::cout << rotatedRight << std::endl;
 
 //	Shape shape(Shape::T);
 //	shape.show();

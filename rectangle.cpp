@@ -130,6 +130,32 @@ void Rectangle::paste(int x, int y, const Rectangle& other)
 	}
 }
 
+Rectangle Rectangle::rotateLeft() const
+{
+	Rectangle result(m_h, m_w);
+	for (int y = 0; y < m_h; ++y)
+	{
+		for (int x = 0; x < m_w; ++x)
+		{
+			result.setPoint(y, x, point(x, m_h - 1 - y));
+		}
+	}
+	return result;
+}
+
+Rectangle Rectangle::rotateRight() const
+{
+	Rectangle result(m_h, m_w);
+	for (int y = 0; y < m_h; ++y)
+	{
+		for (int x = 0; x < m_w; ++x)
+		{
+			result.setPoint(y, x, point(m_w - 1 - x, y));
+		}
+	}
+	return result;
+}
+
 std::ostream& operator<<(std::ostream& os, const Rectangle& r)
 {
 	for (int yy = r.h(); --yy >= 0;)
