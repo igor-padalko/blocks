@@ -28,9 +28,11 @@ public:
 	int point(int x, int y) const;
 	void setPoint(int x, int y, int value = 1);
 
-	Rectangle copyPart(int x, int y, int w, int h) const;
-	bool comparePart(int x, int y, const Rectangle& other) const;
-	void paste(int x, int y, const Rectangle& other);
+	Rectangle copy(int x, int y, int w, int h) const;
+	bool compare(int x, int y, const Rectangle& other) const;
+	bool compare(const Rectangle& other) const;
+	void insert(int x, int y, const Rectangle& other, int value = 1);
+	void insert(const Rectangle& other, int value = 1);
 
 	Rectangle rotateLeft() const;
 	Rectangle rotateRight() const;

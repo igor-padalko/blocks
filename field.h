@@ -15,6 +15,7 @@ public:
 private:
 	void draw(const Shape& shape, int value);
 	bool isDownAvailable() const;
+	bool isDrawAvailable(const Shape& shape) const;
 private:
 	Shape m_shape;
 };

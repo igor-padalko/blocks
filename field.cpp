@@ -27,49 +27,43 @@ void Field::addShape(const Shape& shape, int x, int y)
 void Field::down()
 {
 	// проверить возможность переместить фигуру ниже
-	if (isDownAvailable())
+	if (!isDownAvailable()) { return; }
+
+	Shape shape = m_shape;
+	shape.setY(shape.y() - 1);
+	if (isDrawAvailable(shape))
 	{
 		draw(m_shape, 0);
-		m_shape.setY(m_shape.y() - 1);
-		draw(m_shape, 1);
+		addShape(shape);
 	}
 }
 
 void Field::draw(const Shape& shape, int value)
 {
-//	for (int row = 0; row < shape.rows(); ++row)
-//	{
-//		for (int col = 0; col < shape.columns(); ++col)
-//		{
-//			if (shape.value(row, col) == 1)
-//			{
-//				setPoint(m_shapeRow + row, m_shapeColumn + col, value);
-//			}
-//		}
-//	}
-	paste(shape.x(), shape.y(), shape);
+	insert(shape, value);
 }
 
 bool Field::isDownAvailable() const
 {
-//	if (m_shapeRow == 0) { return false; }
+	return m_shape.y() != 0;
+}
 
-//	for (int uCol = 0; uCol < m_shape.columns(); ++uCol)
-//	{
-//		int uRow = 0;
-//		for (int row = 0; row < m_shape.rows(); ++row)
-//		{
-//			if (m_shape.value(row, uCol) == 1)
-//			{
-//				uRow = row;
-//				break;
-//			}
-//		}
-//		if (getPoint(uRow + m_shapeRow - 1, uCol + m_shapeColumn) == 1)
-//		{
-//			return false;
-//		}
-//	}
-	return true;
-
+bool Field::isDrawAvailable(const Shape& shape) const
+{
+	// 0) запоминаем поле field в новую переменную
+	Field field = *this;
+	// 1) стираем предыдущую фигуру m_shape
+	field.insert(m_shape, 0);
+	// 2) запоминаем поле под новой фигурой shape
+	Rectangle uShape1 = field.copy(shape.x(), shape.y(), shape.w(), shape.h());
+	// 3) рисуем новую фигуру shape
+	field.insert(shape);
+	// 4) стираем фигуру shape
+	field.insert(shape, 0);
+	// 5) запоминаем поле снова под новой фигурой shape
+	Rectangle uShape2 = field.copy(shape.x(), shape.y(), shape.w(), shape.h());
+	// 6) сравниваем запомненную в 2 и 5
+	bool isEqual = uShape1.compare(uShape2);
+	// 7) если разные, то рисовать нельзя, иначе можно рисовать
+	return isEqual;
 }

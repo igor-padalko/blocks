@@ -97,7 +97,7 @@ void Rectangle::setPoint(int x, int y, int value)
 	}
 }
 
-Rectangle Rectangle::copyPart(int x, int y, int w, int h) const
+Rectangle Rectangle::copy(int x, int y, int w, int h) const
 {
 	Rectangle result(w, h);
 	for (int xx = 0; xx < w; ++xx)
@@ -110,7 +110,7 @@ Rectangle Rectangle::copyPart(int x, int y, int w, int h) const
 	return result;
 }
 
-bool Rectangle::comparePart(int x, int y, const Rectangle& other) const
+bool Rectangle::compare(int x, int y, const Rectangle& other) const
 {
 	for (int xx = 0; xx < other.w(); ++xx)
 	{
@@ -127,15 +127,28 @@ bool Rectangle::comparePart(int x, int y, const Rectangle& other) const
 	return true;
 }
 
-void Rectangle::paste(int x, int y, const Rectangle& other)
+bool Rectangle::compare(const Rectangle& other) const
+{
+	return compare(other.x(), other.y(), other);
+}
+
+void Rectangle::insert(int x, int y, const Rectangle& other, int value)
 {
 	for (int xx = 0; xx < other.w(); ++xx)
 	{
 		for (int yy = 0; yy < other.h(); ++yy)
 		{
-			setPoint(x + xx, y + yy, other.point(xx, yy));
+			if (other.point(xx, yy) != 0)
+			{
+				setPoint(x + xx, y + yy, value);
+			}
 		}
 	}
+}
+
+void Rectangle::insert(const Rectangle& other, int value)
+{
+	insert(other.x(), other.y(), other, value);
 }
 
 Rectangle Rectangle::rotateLeft() const
