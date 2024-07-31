@@ -134,6 +134,7 @@ bool Rectangle::compare(const Rectangle& other) const
 
 void Rectangle::insert(int x, int y, const Rectangle& other, int value)
 {
+	// TODO: неоюходимо проверять не выходит ли other за пределы this
 	for (int xx = 0; xx < other.w(); ++xx)
 	{
 		for (int yy = 0; yy < other.h(); ++yy)

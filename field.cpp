@@ -31,11 +31,53 @@ void Field::down()
 
 	Shape shape = m_shape;
 	shape.setY(shape.y() - 1);
-	if (isDrawAvailable(shape))
+	drawIfAvailable(shape);
+}
+
+void Field::moveR()
+{
+	Shape shape = m_shape;
+	shape.setX(shape.x() + 1);
+	if (shape.x() + shape.w() > w())
 	{
-		draw(m_shape, 0);
-		addShape(shape);
+		shape.setX(shape.x() - 1);
 	}
+	drawIfAvailable(shape);
+}
+
+void Field::moveL()
+{
+	Shape shape = m_shape;
+	shape.setX(shape.x() - 1);
+	if (shape.x() < 0)
+	{
+		shape.setX(shape.x() + 1);
+	}
+	drawIfAvailable(shape);
+}
+
+void Field::rotateR()
+{
+	Shape shape = m_shape.rotateRight();
+	shape.setX(m_shape.x());
+	if (shape.x() + shape.w() > w())
+	{
+		shape.setX(shape.x() - 1);
+	}
+	shape.setY(m_shape.y());
+	drawIfAvailable(shape);
+}
+
+void Field::rotateL()
+{
+	Shape shape = m_shape.rotateLeft();
+	shape.setX(m_shape.x());
+	if (shape.x() + shape.w() > w())
+	{
+		shape.setX(shape.x() - 1);
+	}
+	shape.setY(m_shape.y());
+	drawIfAvailable(shape);
 }
 
 void Field::draw(const Shape& shape, int value)
@@ -66,4 +108,13 @@ bool Field::isDrawAvailable(const Shape& shape) const
 	bool isEqual = uShape1.compare(uShape2);
 	// 7) если разные, то рисовать нельзя, иначе можно рисовать
 	return isEqual;
+}
+
+void Field::drawIfAvailable(const Shape& shape)
+{
+	if (isDrawAvailable(shape))
+	{
+		draw(m_shape, 0);
+		addShape(shape, shape.x(), shape.y());
+	}
 }
